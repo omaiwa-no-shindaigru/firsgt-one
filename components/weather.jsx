@@ -1,4 +1,5 @@
 import React from "react";
+
 const Weather = (props) => {
   return (
     <div className="container text-light d-flex justify-content-center">
@@ -9,28 +10,19 @@ const Weather = (props) => {
         </h5>
 
         {/* Get Celsius */}
-        {props.temp_celsius ? (
-          <h1 className="py-2 d-flex justify-content-center">
-            {props.temp_celsius}&deg;
-          </h1>
-        ) : null}
+        {props.temp_celsius ? <h1 className="py-2 d-flex justify-content-center">{props.temp_celsius}&deg;</h1> : null}
 
         {/* show max and min temp */}
-        {maxminTemp(props.temp_min, props.temp_max)}
+        {maxMinTemp(props.temp_min, props.temp_max)}
 
         {/* Weather description */}
-        <h4 className="py-3">
-          {props.description.charAt(0).toUpperCase() +
-            props.description.slice(1)}
-        </h4>
+        <h4 className="py-3 text-center">{props.description.charAt(0).toUpperCase() + props.description.slice(1)}</h4>
       </div>
     </div>
   );
 };
 
-export default Weather;
-
-function maxminTemp(min, max) {
+function maxMinTemp(min, max) {
   if (max && min) {
     return (
       <h3>
@@ -40,3 +32,5 @@ function maxminTemp(min, max) {
     );
   }
 }
+
+export default Weather;

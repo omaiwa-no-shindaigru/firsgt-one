@@ -1,11 +1,7 @@
 import React from "react";
-//import "./App.module.css";
-import Form from "../pages/form";
+import Form from "../components/form";
 import Weather from "../components/weather";
-import "bootstrap/dist/css/bootstrap.min.css";
-import weather-icons/css/weather-icons.css";
-
-const Api_Key = "2dddca87eac46f4126ae969f4066037a";
+import { Api_Key } from "../config";
 
 class App extends React.Component {
   constructor() {
@@ -19,7 +15,7 @@ class App extends React.Component {
       temp_max: null,
       temp_min: null,
       description: "",
-      error: false,
+      error: false
     };
 
     this.weatherIcon = {
@@ -29,7 +25,7 @@ class App extends React.Component {
       Snow: "wi-snow",
       Atmosphere: "wi-fog",
       Clear: "wi-day-sunny",
-      Clouds: "wi-day-fog",
+      Clouds: "wi-day-fog"
     };
   }
 
@@ -61,7 +57,7 @@ class App extends React.Component {
     }
   }
 
-  calCelsius(temp) 
+  calCelsius(temp) {
     let cell = Math.floor(temp - 273.15);
     return cell;
   }
@@ -69,14 +65,11 @@ class App extends React.Component {
   getWeather = async (e) => {
     e.preventDefault();
 
-    const country = e.target.elements.country.value;
-    const city = e.target.elements.city.value;
+    const country = e.target.elements?.country?.value;
+    const city = e.target.elements?.city?.value;
 
     if (country && city) {
-      const api_call = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${Api_Key}`
-      );
-
+      const api_call = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${Api_Key}`);
       const response = await api_call.json();
 
       this.setState({
@@ -87,7 +80,7 @@ class App extends React.Component {
         temp_max: this.calCelsius(response.main.temp_max),
         temp_min: this.calCelsius(response.main.temp_min),
         description: response.weather[0].description,
-        error: false,
+        error: false
       });
 
       // seting icons
@@ -96,7 +89,7 @@ class App extends React.Component {
       console.log(response);
     } else {
       this.setState({
-        error: true,
+        error: true
       });
     }
   };
@@ -106,14 +99,7 @@ class App extends React.Component {
       <div className="Apps p-3 ">
         <div className="container">
           <Form loadweather={this.getWeather} error={this.state.error} />
-          <Weather
-            cityname={this.state.city}
-            weatherIcon={this.state.icon}
-            temp_celsius={this.state.celsius}
-            temp_max={this.state.temp_max}
-            temp_min={this.state.temp_min}
-            description={this.state.description}
-          />
+          <Weather cityname={this.state.city} weatherIcon={this.state.icon} temp_celsius={this.state.celsius} temp_max={this.state.temp_max} temp_min={this.state.temp_min} description={this.state.description} />
         </div>
       </div>
     );
