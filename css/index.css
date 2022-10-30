@@ -5,9 +5,9 @@
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-   
+
   }
-  
+
   .code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
       monospace;
@@ -17,7 +17,7 @@
 .Apps {
   background: url("/photo.jpg");
   background-size: cover;
-  height: 100vh;
+  min-height: 100vh;
   /* background-repeat: no-repeat; */
   background-position: bottom;
 }
